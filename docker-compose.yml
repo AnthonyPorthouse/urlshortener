@@ -1,0 +1,36 @@
+version: "3.3"
+
+services:
+  nginx:
+    image: nginx:alpine
+
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/urlshortener.conf:ro
+      - ./app/public:/var/www/html/public:ro
+
+    links:
+      - php
+
+    ports:
+      - "80:80"
+
+
+  php:
+    image: php:fpm-alpine
+
+    volumes:
+      - ./app:/var/www/html
+
+    links:
+      - mysql
+
+  mysql:
+    image: mysql:latest
+
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+
+    environment:
+      MYSQL_DATABASE: urlshortener
+      MYSQL_USER: urlshortener
+      MYSQL_PASSWORD: secret
