@@ -4,10 +4,10 @@
     "type": "project",
     "require": {
         "doctrine/dbal": "^2.6",
-        "php-di/php-di": "^5.4",
         "league/route": "^3.0",
-        "symfony/http-foundation": "^3.3",
-        "zendframework/zend-diactoros": "^1.6"
+        "zendframework/zend-diactoros": "^1.6",
+        "tuupola/base62": "^0.8.0",
+        "robmorgan/phinx": "^0.9.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.3"

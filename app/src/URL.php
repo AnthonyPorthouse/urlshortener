@@ -4,8 +4,14 @@ namespace Src;
 
 class URL
 {
-    public function shorten(string $url): string
+    public $id;
+    public $url;
+    public $hash;
+
+    public function __construct(int $id, string $url = '', string $hash = '')
     {
-        return md5($url);
+        $this->url = $url;
+        $this->hash = $hash;
+        $this->id = $id;
     }
 }

@@ -1,4 +1,4 @@
-version: "3.3"
+version: "2"
 
 services:
   nginx:
@@ -16,7 +16,8 @@ services:
 
 
   php:
-    image: php:fpm-alpine
+    build:
+      context: ./docker/php
 
     volumes:
       - ./app:/var/www/html
@@ -30,7 +31,11 @@ services:
     volumes:
       - ./data/mysql:/var/lib/mysql
 
+    ports:
+      - "3306:3306"
+
     environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 'true'
       MYSQL_DATABASE: urlshortener
       MYSQL_USER: urlshortener
       MYSQL_PASSWORD: secret
