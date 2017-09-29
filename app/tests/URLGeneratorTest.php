@@ -41,6 +41,12 @@ class URLGeneratorTest extends TestCase
         $this->assertNotEmpty($url->hash);
     }
 
+    public function testShortenOnlyWorksOnURLs()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->gen->shortenURL('notvalid');
+    }
+
     public function testGetFromHash()
     {
         $url = $this->gen->shortenURL('http://google.com');
@@ -48,5 +54,11 @@ class URLGeneratorTest extends TestCase
         $url2 = $this->gen->getURLFromHash($url->hash);
 
         $this->assertEquals($url->url, $url2->url);
+    }
+
+    public function testExceptionThrownIfHashDoesntExist()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->gen->getURLFromHash('====');
     }
 }
